@@ -77,22 +77,33 @@ router.delete("/:userId", async (req, res) => {
 // ADD a friend to a user
 router.post("/:userId/friends/:friendId", async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(
-      req.params.userId,
-      { $addToSet: { friends: req.params.friendId } },
-      { new: true }
-    );
+    const { userId, friendId } = req.params;
 
+    // Check if the user exists
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json(user);
+    // Check if the friend user exists
+    const friendUser = await User.findById(friendId);
+    if (!friendUser) {
+      return res.status(404).json({ message: "Friend not found" });
+    }
+
+    // Add friendId to the user's friends array
+    await User.findByIdAndUpdate(
+      userId,
+      { $addToSet: { friends: friendId } }, // to avoid duplicates
+      { new: true }
+    );
+
+    res.status(200).json({ message: "Friend added successfully" });
   } catch (err) {
+    console.error("Error adding friend:", err);
     res.status(500).json({ error: err.message });
   }
 });
-
 // DELETE a friend from a user by friend ID
 router.delete("/:userId/friends/:friendId", async (req, res) => {
   try {
