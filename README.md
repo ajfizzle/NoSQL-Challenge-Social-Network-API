@@ -60,6 +60,7 @@ To run this application locally, follow these steps:
     - Ensure `.env` file is in the root directory
 
 3.  Start the server by running: `npm start` or `node server.js`
+    - Note: You can seed DB `node utils/seed.js` before starting server
 
 ## Usage
 
@@ -107,6 +108,8 @@ To run this application locally, follow these steps:
        - createdAt (Date, Set default value to the current timestamp, Use a getter method to format the timestamp)
 
 ## Preview / Screenshot / Walkthrough Video
+
+<video controls src="NoSQL-Challenge-Social-Network-API.mp4" title="Title"></video>
 
 ## Contact
 

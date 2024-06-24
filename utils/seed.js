@@ -1,3 +1,5 @@
+// utils/seed.js
+
 const mongoose = require("mongoose");
 const { User, Thought } = require("../models");
 require("dotenv").config(); // Load environment variables from .env file
@@ -34,14 +36,22 @@ const seedDatabase = async () => {
       {
         thoughtText: "This is a thought from Test 1",
         username: "Test 1",
+        reactions: [
+          { reactionBody: "Great thought!", username: "Test 2" },
+          { reactionBody: "I agree!", username: "Test 4" },
+        ],
       },
       {
         thoughtText: "Another thought from Test 1",
         username: "Test 1",
+        reactions: [{ reactionBody: "Nice!", username: "Test 2" }],
       },
       {
         thoughtText: "Thought from Test 2",
         username: "Test 2",
+        reactions: [
+          { reactionBody: "Interesting perspective.", username: "Test 1" },
+        ],
       },
     ]);
 

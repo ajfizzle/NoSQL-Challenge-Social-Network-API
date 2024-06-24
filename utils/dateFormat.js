@@ -7,14 +7,12 @@ module.exports = (timestamp) => {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit",
     hour12: true,
   };
 
+  // Extract the date and time parts using toLocaleString with options
   const formattedDate = date.toLocaleString("en-US", options);
 
-  // Extract the date and time parts
-  const [datePart, timePart] = formattedDate.split(", ");
-  const [month, day, year] = datePart.split("/");
-
-  return `${month}.${day}.${year} ${timePart}`;
+  return formattedDate;
 };
