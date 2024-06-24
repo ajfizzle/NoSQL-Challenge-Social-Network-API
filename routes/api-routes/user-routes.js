@@ -51,7 +51,7 @@ router.put("/:userId", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json(user);
+    res.status(200).json({ message: "User updated successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -104,20 +104,35 @@ router.post("/:userId/friends/:friendId", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 // DELETE a friend from a user by friend ID
 router.delete("/:userId/friends/:friendId", async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(
-      req.params.userId,
-      { $pull: { friends: req.params.friendId } },
-      { new: true }
-    );
+    const user = await User.findById(req.params.userId);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json(user);
+    const friendUser = await User.findById(req.params.friendId);
+
+    if (!friendUser) {
+      return res.status(404).json({ message: "Friend user not found" });
+    }
+
+    if (!user.friends.includes(req.params.friendId)) {
+      return res
+        .status(404)
+        .json({ message: "Friend not found in user's friend list" });
+    }
+
+    await User.findByIdAndUpdate(
+      req.params.userId,
+      { $pull: { friends: req.params.friendId } },
+      { new: true }
+    );
+
+    res.status(200).json({ message: "Friend removed" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

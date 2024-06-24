@@ -171,19 +171,30 @@ router.post("/:thoughtId/reactions", async (req, res) => {
 });
 
 // DELETE a reaction from a thought by reaction ID
+// DELETE a reaction from a thought by reaction ID
 router.delete("/:thoughtId/reactions/:reactionId", async (req, res) => {
   try {
-    const thought = await Thought.findByIdAndUpdate(
-      req.params.thoughtId,
-      { $pull: { reactions: { _id: req.params.reactionId } } },
-      { new: true, runValidators: true }
-    );
+    const thought = await Thought.findById(req.params.thoughtId);
 
     if (!thought) {
       return res.status(404).json({ message: "Thought not found" });
     }
 
-    res.status(200).json(thought);
+    const reaction = thought.reactions.id(req.params.reactionId);
+
+    if (!reaction) {
+      return res
+        .status(404)
+        .json({ message: "Invalid thought_id or reaction_id" });
+    }
+
+    await Thought.findByIdAndUpdate(
+      req.params.thoughtId,
+      { $pull: { reactions: { _id: req.params.reactionId } } },
+      { new: true, runValidators: true }
+    );
+
+    res.status(200).json({ message: "Reaction deleted" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
