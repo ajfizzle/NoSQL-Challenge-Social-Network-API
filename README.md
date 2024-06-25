@@ -108,7 +108,7 @@ To run this application locally, follow these steps:
        - createdAt (Date, Set default value to the current timestamp, Use a getter method to format the timestamp)
 
 ## Preview / Screenshot / Walkthrough Video
-
+![alt text](NoSQL-Challenge-Social-Network-API.gif)
 <video controls src="NoSQL-Challenge-Social-Network-API.mp4" title="Title"></video>
 
 ## Contact
