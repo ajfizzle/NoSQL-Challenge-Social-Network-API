@@ -108,7 +108,7 @@ To run this application locally, follow these steps:
        - createdAt (Date, Set default value to the current timestamp, Use a getter method to format the timestamp)
 
 ## Preview / Screenshot / Walkthrough Video
-![alt text](NoSQL-Challenge-Social-Network-API.gif)
+https://github.com/ajfizzle/NoSQL-Challenge-Social-Network-API/assets/28770544/955d3333-9dcb-411a-b799-032b945178d4
 <video controls src="NoSQL-Challenge-Social-Network-API.mp4" title="Title"></video>
 
 ## Contact
@@ -129,3 +129,7 @@ For more projects and information about the developer, please visit:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+
+
